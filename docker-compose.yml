@@ -1,0 +1,50 @@
+
+    version: '3'
+    # volumes:
+    #   pg_named:
+    services:
+      ngi:
+        image: nginx:latest
+        ports:
+          - "700:80"
+        volumes:
+          - ./webser:/etc/nginx/conf.d
+          - ./siteroot:/var/www
+          - ./journal/wserv:/var/log/nginx
+        links:
+          - piha
+      piha:
+        build: ./constr/hyprep
+        extra_hosts:
+          host.docker.internal: host-gateway
+        ports:
+          - "7000:8000"
+        volumes:
+          - ./siteroot:/var/www
+          - ./journal/xdeb:/var/logs/xdebug
+          ### - ./phconf:/etc/php/8.1/fpm/conf.d
+        links:
+          - pg_dbms
+      ### masha:
+      ###   image: mariadb:10.11.2
+      ###   environment:
+      ###     MYSQL_ROOT_PASSWORD: root
+      ###     MYSQL_DATABASE: vehshop
+      ###     MYSQL_USER: app
+      ###     MYSQL_PASSWORD: demo
+      ###   volumes:
+      ###     - ./databa:/var/lib/mysql
+      ###   ports:
+      ###     - "33060:3306"
+      pg_dbms:
+        image: postgres:16.1
+        environment:
+          POSTGRES_USER: ${POSTGRES_SUPER_USER} ## используется для создания указанного пользователя с полномочиями суперпользователя
+          POSTGRES_PASSWORD: ${POSTGRES_SUPER_PASSWORD} ## используется для определения пароля пользователя, идентифицируемого POSTGRES_USER
+          POSTGRES_DB: 'me_app_lara' ## Определение другого имени для базы данных по умолчанию, которая создается при первом запуске образа. Если оно не указано, то используется значение из POSTGRES_USER.
+        volumes:
+         - './d_pg_init:/docker-entrypoint-initdb.d'
+         - './d_pg:/var/lib/postgresql/data'
+        #  - pg_named:/var/lib/postgresql/data
+        ports:
+          - 54320:5432
