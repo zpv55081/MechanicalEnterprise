@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UIController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('priv', function () {
+    return view('privet', ['name' => 'Samantha']);
+});
+
+Route::match(['get', 'post'], 'generateco', [UIController::class, 'generateCommercialOffer']);

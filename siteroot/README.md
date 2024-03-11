@@ -40,6 +40,14 @@ Composer
 
     `php artisan config:cache`
 
+- Накатить миграции
+
+    `php artisan migrate`
+
+- Накатить сиды
+
+    `php artisan db:seed`
+
 **Готово**
 
 ### Продакшн
@@ -47,6 +55,8 @@ Composer
 * Оптимизация загрузки маршрута prod
 
     `php artisan route:cache`
+
+    (для отмены: php artisan route:clear)
 
 ### Документация и остальное
 
