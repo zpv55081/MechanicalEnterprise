@@ -25,6 +25,15 @@
           ### - ./phconf:/etc/php/8.1/fpm/conf.d
         links:
           - pg_dbms
+      rediska:
+        image: redis:7.2.4
+        container_name: 'rediska-server'
+        restart: unless-stopped
+        ports:
+            - "63790:6379"
+        volumes:
+            - ./red_is:/usr/local/etc/redis
+        command: [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
       ### masha:
       ###   image: mariadb:10.11.2
       ###   environment:

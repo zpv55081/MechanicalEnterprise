@@ -13,6 +13,7 @@ RUN apt-get update \
     ### https://www.php.net/manual/ru/pcre.installation.php
     php8.2-pdo \
     php8.2-pgsql \
+    php8.2-redis \
     php8.2-tokenizer \
     php8.2-xml \
 	php8.2-xdebug\
