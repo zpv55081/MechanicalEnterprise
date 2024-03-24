@@ -17,7 +17,7 @@ class CreateCatalogTable extends Migration
 
             $table->id();
             $table->string('name');
-            $table->string('vendor_code')->nullable()->comment('Артикул');
+            $table->string('vendor_code')->index()->nullable()->comment('Артикул');
             $table->timestamps();
             $table->softDeletes();
             $table->comment('Каталог');
