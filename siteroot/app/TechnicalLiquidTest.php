@@ -11,7 +11,7 @@ class TechnicalLiquidTest extends TestCase
 {
     protected $fixture;
 
-    public function providerGetWeight()
+    public static function providerGetWeight()
     {
         return [
             [0.5, 4, 2],
