@@ -25,6 +25,15 @@
           ### - ./phconf:/etc/php/8.1/fpm/conf.d
         links:
           - pg_dbms
+      rabmq:
+        image: rabbitmq:3.13.0-management
+        container_name: rabmqcont
+        environment:
+          - RABBITMQ_DEFAULT_USER=guest
+          - RABBITMQ_DEFAULT_PASS=guest
+        ports:
+          - 56720:5672
+          - 15670:15672
       rediska:
         image: redis:7.2.4
         container_name: 'rediska-server'
