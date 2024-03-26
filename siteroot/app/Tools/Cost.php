@@ -18,8 +18,8 @@ trait Cost
         return $this->foreignCurrencyCost;
     }
 
-    public function setCost(Price $price)
+    public function setCost(CurrencyExchange $ce)
     {
-        //$this->cost = $price->basePrice * $price->coefficient;
+        return $this->cost / $ce->receiveRates()['USD'];
     }
 }
