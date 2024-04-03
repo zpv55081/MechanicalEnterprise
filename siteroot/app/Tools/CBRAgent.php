@@ -6,7 +6,7 @@ namespace App\Tools;
  * @author ElisDN <mail@elisdn.ru>
  * @link https://elisdn.ru
  */
-class CBRAgent
+class CBRAgent implements BankAgent
 {
     protected $list = array();
  

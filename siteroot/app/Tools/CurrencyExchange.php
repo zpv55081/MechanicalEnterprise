@@ -12,6 +12,8 @@ class CurrencyExchange
 {
     public array $currKeys = ['USD', 'EUR'];
 
+    private BankAgent $bankAgent;
+
     private Connection $redisResource;
 
     function __construct()
@@ -19,18 +21,21 @@ class CurrencyExchange
         $this->redisResource = Redis::connection();
     }
 
+    public function setBankAgent(BankAgent $agent) :void
+    {
+        $this->bankAgent = $agent;
+    }
+
     /**
      * Скачать курсы
      */
     private function downloadRates(): ?array
     {
-        $cbrAgent = new CBRAgent;
-
         $arRates = null;
-        if ($cbrAgent->load()) {     
-            foreach($this->currKeys as $currency) {  
-                $arRates[$currency] = $cbrAgent->get($currency);
-            }    
+        if ($this->bankAgent->load()) {
+            foreach ($this->currKeys as $currency) {
+                $arRates[$currency] = $this->bankAgent->get($currency);
+            }
         }
 
         return $arRates;
@@ -47,7 +52,7 @@ class CurrencyExchange
     /**
      * Получить курсы валют
      */
-    public function receiveRates() :array
+    public function receiveRates(): array
     {
         $ratesJson = $this->redisResource->get('currency_rates');
         $cachedCurrencyRates = json_decode($ratesJson, true);
