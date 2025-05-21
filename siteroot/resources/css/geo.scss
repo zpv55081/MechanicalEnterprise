@@ -1,0 +1,116 @@
+@import "@sass/elements/blocks/banner__new";
+
+@import "@sass/elements/accordion--with-tabs";
+@import "@sass/elements/accordion";
+
+@import "@sass/elements/blocks/tooltip";
+
+@import "@sass/elements/blocks/principle_of_operation--map";
+
+.search-settlements {
+    .search {
+        &-text {
+            &.ok {
+                .search {
+                    &_fail {
+                        display: none;
+                    }
+
+                    &_ok {
+                        display: block;
+                    }
+                }
+            }
+
+            &.fail {
+                .search {
+                    &_fail {
+                        display: block;
+                    }
+
+                    &_ok {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &_fail {
+            display: none;
+            margin: 30px auto 30px
+        }
+
+        &_ok {
+            display: block;
+        }
+    }
+
+    .seach-form {
+        display: flex;
+        justify-content: center;
+        max-width: 700px;
+        width: 100%;
+
+        form {
+            width: 100%;
+        }
+    }
+
+    .settlements-list {
+        list-style-type: none;
+
+        columns: 4;
+        list-style-position: inside;
+
+        column-width: auto;
+        column-gap: 8%;
+
+        padding-inline-start: 0;
+
+        @media (max-width:780px) {
+            columns: 3;
+
+        }
+
+        @media (max-width:500px) {
+            columns: 2;
+
+        }
+
+        @media (max-width:340px) {
+            columns: 1;
+
+        }
+    }
+
+
+    li {
+        margin-top: 10px;
+        position: relative;
+        display: flex;
+
+        &.empty-letter {
+            padding-left: 20px;
+        }
+
+        span {
+            color: var(--border-color);
+            display: block;
+            gap: 10px;
+            width: 20px;
+            flex-shrink: 0;
+        }
+
+        a {
+            color: var(--primaryBlack);
+
+            &:hover {
+                color: var(--primaryRed)
+            }
+        }
+
+        &.current {
+            font-weight: bold;
+        }
+    }
+}
